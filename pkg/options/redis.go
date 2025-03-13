@@ -1,4 +1,4 @@
-package options
+package genericopts
 
 import (
 	"github.com/chhz0/gokit/pkg/cli"
@@ -9,7 +9,7 @@ type RedisOptions struct {
 	Url      string `json:"url" mapstructure:"url"`
 	User     string `json:"user" mapstructure:"user"`
 	Passwrod string `json:"password" mapstructure:"password"`
-	DB int    `json:"db" mapstructure:"db"`
+	DB       int    `json:"db" mapstructure:"db"`
 }
 
 // LocalFlags implements cli.Flager.
@@ -39,11 +39,11 @@ func (r *RedisOptions) Validate() error {
 	return nil
 }
 
-func newRedisOptions() *RedisOptions {
+func NewRedisOptions() *RedisOptions {
 	return &RedisOptions{
 		Url:      "127.0.0.1:6379",
 		User:     "",
 		Passwrod: "",
-		DB: 0,
+		DB:       0,
 	}
 }

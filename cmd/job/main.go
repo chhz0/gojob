@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"github.com/chhz0/gojob/cmd/job/app"
+
+	_ "go.uber.org/automaxprocs"
 )
 
 func main() {

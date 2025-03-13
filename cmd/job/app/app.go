@@ -2,7 +2,6 @@ package app
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/chhz0/gojob/cmd/job/app/options"
 	"github.com/chhz0/gokit"
@@ -18,13 +17,32 @@ func NewJobCommand() (cli.CliExector, error) {
 		CmdLong: `job is an asynchronous task processing framework driven by the Go language,
 supporting task management, custom tasks, etc.`,
 		RunFunc: func(ctx context.Context, args []string) error {
-			fmt.Println("go job is running now...")
-			fmt.Printf("svr opts: %v\n", svrOpts)
-			return nil
+			return run(svrOpts)
 		},
 		Flager: svrOpts,
+		Commanders: []cli.Commander{
+			newVersion(),
+		},
 	},
 		cli.EnableConfig(vc.V()),
 		cli.SetConfigHandler(vc.Load),
 	)
+}
+
+func run(opts *options.ServerOptions) error {
+	if err := opts.Validate(); err != nil {
+		return err
+	}
+
+	cfg, err := opts.Config()
+	if err != nil {
+		return err
+	}
+
+	svr, err := cfg.NewServer()
+	if err != nil {
+		return err
+	}
+
+	return svr.Run()
 }

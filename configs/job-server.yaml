@@ -1,0 +1,28 @@
+server: 127.0.0.1:8080
+open_tls: false
+
+mysql:
+  dsn: "root:pwd@tcp(127.0.0.1:3306)/gojob?charset=utf8mb4&parseTime=True&loc=Local"
+  addr: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "pwd"
+  db: "gojob"
+  max_idle_conn: 100 # 最大空闲连接数
+  max_active_conn: 100 # 最大打开的连接数
+  max_conn_life_time: 10s # 空闲连接最大存活时间
+  log_file: ""
+
+redis:
+  url: "127.0.0.1:6379"
+  user: ""
+  password: ""
+  db: 0
+
+job:
+  max_table_rows: 5000000
+  split_interval: 30s
+  long_process_interval: 10s
+  check_interval: 10s
+  max_process_time: 10s
+  open_govern: true

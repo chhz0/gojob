@@ -4,8 +4,10 @@ import (
 	"context"
 
 	"github.com/chhz0/gojob/cmd/job/app/options"
+	"github.com/chhz0/gojob/internal/pkg/logger"
 	"github.com/chhz0/gokit"
 	"github.com/chhz0/gokit/pkg/cli"
+	"github.com/chhz0/gokit/pkg/log"
 )
 
 func NewJobCommand() (cli.CliExector, error) {
@@ -30,6 +32,8 @@ supporting task management, custom tasks, etc.`,
 }
 
 func run(opts *options.ServerOptions) error {
+	logger.NewLogger()
+	log.Info("job is starting with the options", log.Any("options", opts))
 	if err := opts.Validate(); err != nil {
 		return err
 	}

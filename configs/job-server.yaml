@@ -1,4 +1,5 @@
-server: 127.0.0.1:8080
+server_mode: gin
+addr: ":8080"
 open_tls: false
 
 mysql:
@@ -10,7 +11,7 @@ mysql:
   max_idle_conn: 100 # 最大空闲连接数
   max_open_conn: 100 # 最大打开的连接数
   max_conn_life_time: 10s # 空闲连接最大存活时间
-  log_file: ""
+  log_file: "./log/mysql.log"
 
 redis:
   url: "127.0.0.1:6379"
@@ -25,3 +26,7 @@ job:
   check_interval: 10s
   max_process_time: 10s
   open_govern: true
+
+log:
+  level: info
+  file: "./log/job.log"

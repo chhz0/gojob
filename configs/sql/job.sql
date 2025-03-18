@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `gojob`;
-USE `gojob`;
+CREATE DATABASE IF NOT EXISTS `gotasks`;
+USE `gotasks`;
 
 -- 核心任务表
 -- task_sharding 分片主表
@@ -92,8 +92,8 @@ CREATE TABLE `t_task_type_0000` (
 --   KEY `idx_trigger_time` (`trigger_time`)
 -- ) ENGINE=InnoDB COMMENT='任务日志分片表';
 
--- -- task_job_info 任务依赖关系表
--- DROP TABLE IF EXISTS `t_task_job_info`;
+-- -- task_tasks_info 任务依赖关系表
+-- DROP TABLE IF EXISTS `t_task_tasks_info`;
 -- CREATE TABLE `t_task_dependency` (
 --   `task_id` char(32) NOT NULL,
 --   `pre_task_id` char(32) NOT NULL COMMENT '前置任务ID',

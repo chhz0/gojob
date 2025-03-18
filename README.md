@@ -1,4 +1,4 @@
-# gojob (beta)
-aysnc job
+# gotasks (beta)
+aysnc tasks
 
-- 在gojob中使用了gokit提供的基础包.
+- 在gotasks中使用了gokit提供的基础包.

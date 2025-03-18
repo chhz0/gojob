@@ -6,8 +6,8 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/chhz0/gojob/internal/job"
-	genericopts "github.com/chhz0/gojob/pkg/options"
+	"github.com/chhz0/gotasks/internal/tasks"
+	genericopts "github.com/chhz0/gotasks/pkg/options"
 	"github.com/chhz0/gokit/pkg/cli"
 	"github.com/spf13/pflag"
 )
@@ -20,7 +20,7 @@ type ServerOptions struct {
 
 	MySQL *genericopts.MySQLOptions `json:"mysql" mapstructure:"mysql"`
 	Redis *genericopts.RedisOptions `json:"redis" mapstructure:"redis"`
-	Job   *JobOptions               `json:"job" mapstructure:"job"`
+	tasks   *tasksOptions               `json:"tasks" mapstructure:"tasks"`
 }
 
 // LocalFlags implements cli.Flager.
@@ -78,8 +78,8 @@ func (s *ServerOptions) ToJSON() string {
 	return string(j)
 }
 
-func (s *ServerOptions) Config() (*job.Config, error) {
-	cfg := &job.Config{
+func (s *ServerOptions) Config() (*tasks.Config, error) {
+	cfg := &tasks.Config{
 		Mode:    s.Mode,
 		Engine:  s.Engine,
 		Addr:    s.Addr,
@@ -99,6 +99,6 @@ func NewServerOptions() *ServerOptions {
 		OpenTLS: false,
 		MySQL:   genericopts.NewMySQLOptions(),
 		Redis:   genericopts.NewRedisOptions(),
-		Job:     newJobOptions(),
+		tasks:     newtasksOptions(),
 	}
 }

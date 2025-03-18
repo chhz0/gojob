@@ -4,7 +4,7 @@ build:
 
 .PHONY: build
 run:
-	@_output/job
+	@_output/tasks
 
 .PHONY: tidy
 tidy:
@@ -16,4 +16,4 @@ clean:
 
 .PHONY: gen-model
 gen-model:
-	@gentool -db mysql -dsn 'root:root@tcp(127.0.0.1:3306)/gojob' -onlyModel -modelPkgName internal/job/model
+	@gentool -db mysql -dsn 'root:root@tcp(127.0.0.1:3306)/gotasks' -onlyModel -modelPkgName internal/tasks/model

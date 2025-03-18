@@ -1,8 +1,8 @@
 package biz
 
 import (
-	bizv1 "github.com/chhz0/gojob/internal/job/biz/v1"
-	"github.com/chhz0/gojob/internal/job/store"
+	bizv1 "github.com/chhz0/gotasks/internal/tasks/biz/v1"
+	"github.com/chhz0/gotasks/internal/tasks/store"
 )
 
 type IBiz interface {

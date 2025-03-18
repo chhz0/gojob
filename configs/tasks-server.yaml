@@ -8,7 +8,7 @@ mysql:
   port: 3306
   user: "root"
   password: "pwd"
-  db: "gojob"
+  db: "gotasks"
   max_idle_conn: 100 # 最大空闲连接数
   max_open_conn: 100 # 最大打开的连接数
   max_conn_life_time: 10s # 空闲连接最大存活时间
@@ -20,7 +20,7 @@ redis:
   password: ""
   db: 0
 
-job:
+tasks:
   max_table_rows: 5000000
   split_interval: 30s
   long_process_interval: 10s
@@ -30,4 +30,4 @@ job:
 
 log:
   level: info
-  file: "./log/job.log"
+  file: "./log/tasks.log"

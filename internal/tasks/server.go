@@ -1,8 +1,8 @@
-package job
+package tasks
 
 import (
-	"github.com/chhz0/gojob/internal/job/router"
-	genericopts "github.com/chhz0/gojob/pkg/options"
+	"github.com/chhz0/gotasks/internal/tasks/router"
+	genericopts "github.com/chhz0/gotasks/pkg/options"
 	"github.com/chhz0/gokit/pkg/log"
 	"github.com/chhz0/gokit/pkg/server"
 	"github.com/chhz0/gokit/pkg/server/engines"

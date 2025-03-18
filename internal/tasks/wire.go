@@ -1,4 +1,4 @@
-package job
+package tasks
 
 func InitialzeServer() {
 

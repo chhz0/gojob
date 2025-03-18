@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/pflag"
 )
 
-type JobOptions struct {
+type tasksOptions struct {
 	MaxTableRows        int           `json:"max_table_rows" mapstructure:"max_table_rows"`
 	SplitInterval       time.Duration `json:"split_interval" mapstructure:"split_interval"`
 	LongProcessInterval time.Duration `json:"long_process_interval" mapstructure:"long_process_interval"`
@@ -17,13 +17,13 @@ type JobOptions struct {
 }
 
 // LocalFlags implements cli.Flager.
-func (j *JobOptions) LocalFlags(fs *pflag.FlagSet) *cli.FlagSet {
-	fs.IntVar(&j.MaxTableRows, "job.max-table-rows", j.MaxTableRows, "max table rows")
-	fs.DurationVar(&j.SplitInterval, "job.split-interval", j.SplitInterval, "split interval")
-	fs.DurationVar(&j.LongProcessInterval, "job.long-process-interval", j.LongProcessInterval, "long process interval")
-	fs.DurationVar(&j.CheckInterval, "job.check-interval", j.CheckInterval, "check interval")
-	fs.DurationVar(&j.MaxProcessTime, "job.max-process-time", j.MaxProcessTime, "max process time")
-	fs.BoolVar(&j.OpenGovern, "job.open-govern", j.OpenGovern, "open govern")
+func (j *tasksOptions) LocalFlags(fs *pflag.FlagSet) *cli.FlagSet {
+	fs.IntVar(&j.MaxTableRows, "tasks.max-table-rows", j.MaxTableRows, "max table rows")
+	fs.DurationVar(&j.SplitInterval, "tasks.split-interval", j.SplitInterval, "split interval")
+	fs.DurationVar(&j.LongProcessInterval, "tasks.long-process-interval", j.LongProcessInterval, "long process interval")
+	fs.DurationVar(&j.CheckInterval, "tasks.check-interval", j.CheckInterval, "check interval")
+	fs.DurationVar(&j.MaxProcessTime, "tasks.max-process-time", j.MaxProcessTime, "max process time")
+	fs.BoolVar(&j.OpenGovern, "tasks.open-govern", j.OpenGovern, "open govern")
 
 	return &cli.FlagSet{
 		PFlags:   fs,
@@ -32,17 +32,17 @@ func (j *JobOptions) LocalFlags(fs *pflag.FlagSet) *cli.FlagSet {
 }
 
 // PersistentFlags implements cli.Flager.
-func (j *JobOptions) PersistentFlags(fs *pflag.FlagSet) *cli.FlagSet {
+func (j *tasksOptions) PersistentFlags(fs *pflag.FlagSet) *cli.FlagSet {
 	return &cli.FlagSet{
 		PFlags:   fs,
 		Required: []string{},
 	}
 }
 
-var _ cli.Flager = (*JobOptions)(nil)
+var _ cli.Flager = (*tasksOptions)(nil)
 
-func newJobOptions() *JobOptions {
-	return &JobOptions{
+func newtasksOptions() *tasksOptions {
+	return &tasksOptions{
 		MaxTableRows:        5000000,
 		SplitInterval:       30 * time.Second,
 		LongProcessInterval: 10 * time.Second,

@@ -3,20 +3,20 @@ package app
 import (
 	"context"
 
-	"github.com/chhz0/gojob/cmd/job/app/options"
-	"github.com/chhz0/gojob/internal/pkg/logger"
+	"github.com/chhz0/gotasks/cmd/tasks/app/options"
+	"github.com/chhz0/gotasks/internal/pkg/logger"
 	"github.com/chhz0/gokit"
 	"github.com/chhz0/gokit/pkg/cli"
 	"github.com/chhz0/gokit/pkg/log"
 )
 
-func NewJobCommand() (cli.CliExector, error) {
+func NewtasksCommand() (cli.CliExector, error) {
 	vc := vconfig()
 	svrOpts := options.NewServerOptions()
 	return gokit.NewCli(&cli.SimpleCommand{
-		CmdName:  "job",
-		CmdShort: "job is a simple asynchronous task processing framework",
-		CmdLong: `job is an asynchronous task processing framework driven by the Go language,
+		CmdName:  "tasks",
+		CmdShort: "tasks is a simple asynchronous task processing framework",
+		CmdLong: `tasks is an asynchronous task processing framework driven by the Go language,
 supporting task management, custom tasks, etc.`,
 		RunFunc: func(ctx context.Context, args []string) error {
 			return run(svrOpts)
@@ -33,7 +33,7 @@ supporting task management, custom tasks, etc.`,
 
 func run(opts *options.ServerOptions) error {
 	logger.NewLogger()
-	log.Info("job is starting with the options", log.Any("options", opts))
+	log.Info("tasks is starting with the options", log.Any("options", opts))
 	if err := opts.Validate(); err != nil {
 		return err
 	}

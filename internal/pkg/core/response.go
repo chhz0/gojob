@@ -3,7 +3,7 @@ package core
 import (
 	"net/http"
 
-	"github.com/chhz0/gojob/internal/pkg/errcode"
+	"github.com/chhz0/gotasks/internal/pkg/errcode"
 	"github.com/gin-gonic/gin"
 )
 

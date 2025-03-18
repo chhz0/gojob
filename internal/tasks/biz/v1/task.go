@@ -1,6 +1,6 @@
 package bizv1
 
-import "github.com/chhz0/gojob/internal/job/store"
+import "github.com/chhz0/gotasks/internal/tasks/store"
 
 type TaskBiz interface {
 }

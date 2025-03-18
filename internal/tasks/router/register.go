@@ -3,9 +3,9 @@ package router
 import (
 	"net/http"
 
-	taskrouter "github.com/chhz0/gojob/internal/job/router/task"
-	"github.com/chhz0/gojob/internal/pkg/core"
-	"github.com/chhz0/gojob/internal/pkg/errcode"
+	taskrouter "github.com/chhz0/gotasks/internal/tasks/router/task"
+	"github.com/chhz0/gotasks/internal/pkg/core"
+	"github.com/chhz0/gotasks/internal/pkg/errcode"
 	"github.com/gin-gonic/gin"
 )
 

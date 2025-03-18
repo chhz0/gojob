@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 
-	"github.com/chhz0/gojob/cmd/job/app"
+	"github.com/chhz0/gotasks/cmd/tasks/app"
 
 	_ "go.uber.org/automaxprocs"
 )
 
 func main() {
-	cmd, err := app.NewJobCommand()
+	cmd, err := app.NewtasksCommand()
 	if err != nil {
 		panic(err)
 	}

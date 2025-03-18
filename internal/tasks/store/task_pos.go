@@ -3,8 +3,8 @@ package store
 import (
 	"context"
 
-	modelv1 "github.com/chhz0/gojob/internal/job/model/v1"
-	"github.com/chhz0/gojob/internal/pkg/errcode"
+	modelv1 "github.com/chhz0/gotasks/internal/tasks/model/v1"
+	"github.com/chhz0/gotasks/internal/pkg/errcode"
 	"github.com/chhz0/gokit/pkg/log"
 )
 

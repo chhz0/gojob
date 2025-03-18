@@ -1,9 +1,7 @@
 package job
 
 import (
-	"net/http"
-	"time"
-
+	"github.com/chhz0/gojob/internal/job/router"
 	genericopts "github.com/chhz0/gojob/pkg/options"
 	"github.com/chhz0/gokit/pkg/log"
 	"github.com/chhz0/gokit/pkg/server"
@@ -12,10 +10,12 @@ import (
 )
 
 type Config struct {
-	ServerMode string
-	Addr       string
-	OpenTLS    bool
-	MySQL      *genericopts.MySQLOptions
+	Mode    string
+	Engine  string
+	Addr    string
+	OpenTLS bool
+	MySQL   *genericopts.MySQLOptions
+	Redis   *genericopts.RedisOptions
 }
 
 type Server struct {
@@ -24,14 +24,10 @@ type Server struct {
 }
 
 func (cfg *Config) NewServer() (*Server, error) {
-
 	g := useGin()
-
 	srv := server.NewHttp(
 		&server.HttpConfig{
-			Addr:         cfg.Addr,
-			ReadTimeout:  5 * time.Second,
-			WriteTimeout: 10 * time.Second,
+			Addr: cfg.Addr,
 		},
 		engines.Gin(g),
 	)
@@ -44,20 +40,7 @@ func (cfg *Config) NewServer() (*Server, error) {
 
 func useGin() *gin.Engine {
 	g := gin.New()
-
-	g.NoRoute(func(ctx *gin.Context) {
-		ctx.JSON(http.StatusNotFound, gin.H{
-			"code":    http.StatusNotFound,
-			"message": "Page not found.",
-		})
-	})
-
-	g.GET("/healthz", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"code":    http.StatusOK,
-			"message": "ok",
-		})
-	})
+	router.Register(g)
 
 	return g
 }

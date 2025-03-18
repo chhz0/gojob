@@ -13,17 +13,20 @@ import (
 )
 
 type ServerOptions struct {
-	ServerMode string                    `json:"server_mod" mapstructure:"server_mod"`
-	Addr       string                    `json:"addr" mapstructure:"addr"`
-	OpenTLS    bool                      `json:"open_tls" mapstructure:"open_tls"`
-	MySQL      *genericopts.MySQLOptions `json:"mysql" mapstructure:"mysql"`
-	Redis      *genericopts.RedisOptions `json:"redis" mapstructure:"redis"`
-	Job        *JobOptions               `json:"job" mapstructure:"job"`
+	Mode    string `json:"mode" mapstructure:"mode"`
+	Engine  string `json:"engine" mapstructure:"engine"`
+	Addr    string `json:"addr" mapstructure:"addr"`
+	OpenTLS bool   `json:"open_tls" mapstructure:"open_tls"`
+
+	MySQL *genericopts.MySQLOptions `json:"mysql" mapstructure:"mysql"`
+	Redis *genericopts.RedisOptions `json:"redis" mapstructure:"redis"`
+	Job   *JobOptions               `json:"job" mapstructure:"job"`
 }
 
 // LocalFlags implements cli.Flager.
 func (s *ServerOptions) LocalFlags(fs *pflag.FlagSet) *cli.FlagSet {
-	fs.StringVar(&s.ServerMode, "server-mod", s.ServerMode, "server mod (gin | grpc | ...http)")
+	fs.StringVar(&s.Mode, "mode", s.Mode, "server mode (dev | release)")
+	fs.StringVar(&s.Engine, "engine", s.Engine, "engine (gin | grpc | ...http)")
 	fs.StringVar(&s.Addr, "addr", s.Addr, "server addr")
 	fs.BoolVar(&s.OpenTLS, "open-tls", s.OpenTLS, "open tls")
 
@@ -77,10 +80,12 @@ func (s *ServerOptions) ToJSON() string {
 
 func (s *ServerOptions) Config() (*job.Config, error) {
 	cfg := &job.Config{
-		ServerMode: s.ServerMode,
-		Addr:       s.Addr,
-		OpenTLS:    s.OpenTLS,
-		MySQL:      s.MySQL,
+		Mode:    s.Mode,
+		Engine:  s.Engine,
+		Addr:    s.Addr,
+		OpenTLS: s.OpenTLS,
+		MySQL:   s.MySQL,
+		Redis:   s.Redis,
 	}
 
 	return cfg, nil
@@ -88,11 +93,12 @@ func (s *ServerOptions) Config() (*job.Config, error) {
 
 func NewServerOptions() *ServerOptions {
 	return &ServerOptions{
-		ServerMode: "gin",
-		Addr:       "127.0.0.1:4568",
-		OpenTLS:    false,
-		MySQL:      genericopts.NewMySQLOptions(),
-		Redis:      genericopts.NewRedisOptions(),
-		Job:        newJobOptions(),
+		Mode:    "dev",
+		Engine:  "gin",
+		Addr:    "127.0.0.1:4568",
+		OpenTLS: false,
+		MySQL:   genericopts.NewMySQLOptions(),
+		Redis:   genericopts.NewRedisOptions(),
+		Job:     newJobOptions(),
 	}
 }

@@ -1,4 +1,5 @@
-server_mode: gin
+engine: gin
+mode: release
 addr: ":8080"
 open_tls: false
 
